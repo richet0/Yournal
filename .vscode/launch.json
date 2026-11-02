@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-YournalApplication<yournal>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.yournal.yournal.YournalApplication",
+            "projectName": "yournal",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

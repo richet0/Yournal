@@ -14,7 +14,7 @@ export class TradeService{
 
 
     newTrade(trade : Trade): Observable<Trade>{
-        return this.http.post<Trade>(this.apiUrl, trade);
+        return this.http.post<Trade>(this.apiUrl.concat('trade/save'), trade);
     }
 
 
