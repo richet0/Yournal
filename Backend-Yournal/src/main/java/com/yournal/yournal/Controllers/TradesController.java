@@ -1,13 +1,19 @@
 package com.yournal.yournal.Controllers;
 import org.springframework.web.bind.annotation.RestController;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.yournal.yournal.DTO.DashboardDTO;
 import com.yournal.yournal.Models.Trade;
 import com.yournal.yournal.Services.TradesService;
+import org.springframework.web.bind.annotation.GetMapping;
+
+
 
 
 
@@ -37,6 +43,13 @@ public class TradesController {
     tradesService.deleteTrade(id);
     return ResponseEntity.noContent().build();
    }
+
+   @GetMapping("/metrics")
+   public ResponseEntity<DashboardDTO>metricsThirtyDays(){
+    DashboardDTO metrics = tradesService.get30DaysMetrics();
+    return ResponseEntity.ok(metrics);
+   }
+   
 
     
 

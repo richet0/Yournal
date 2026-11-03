@@ -1,1 +1,68 @@
-<p>dashboard-component works!</p>
+<div class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-4 p-6 bg-gray-50">
+
+  <!-- Tarjeta 1: Net P&L -->
+  <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex flex-col justify-between">
+    <div class="flex items-center space-x-1.5 text-gray-400 text-xs font-semibold">
+      <span>Net P&L</span>
+      <span class="w-3 h-3 border border-gray-300 text-[8px] flex items-center justify-center rounded-full">i</span>
+      <!-- Total de trades ganadores (ejemplo) -->
+      <span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full font-bold text-[10px] ml-1">{{ metrics.wins + metrics.losses }}</span>
+    </div>
+    <div class="flex justify-between items-end mt-3">
+      <!-- Valor dinámico formateado como moneda -->
+      <span class="text-2xl font-extrabold text-gray-700">${{ metrics.totalPnl  }}</span>
+      <div class="bg-indigo-50 text-indigo-500 w-8 h-8 rounded-lg flex items-center justify-center">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4h12v12H4z" opacity="0.2"/><path fill-rule="evenodd" d="M4 2a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2H4zm12 14H4V4h12v12z" clip-rule="evenodd"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tarjeta 3: Win % -->
+  <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex flex-col justify-between">
+    <div class="flex items-center space-x-1.5 text-gray-400 text-xs font-semibold">
+      <span>Win %</span>
+      <span class="text-emerald-500 bg-emerald-50 px-1.5 py-0.5 rounded text-[10px] font-bold">{{ metrics.wins }}</span>
+      <span class="text-red-500 bg-red-50 px-1.5 py-0.5 rounded text-[10px] font-bold">{{ metrics.losses }}</span>
+    </div>
+    <div class="flex justify-between items-end mt-3">
+      <!-- Porcentaje dinámico -->
+      <span class="text-2xl font-extrabold text-gray-700">{{ metrics.winRate | number:'1.2-2' }}%</span>
+      <div class="w-10 h-10 rounded-full border-4 border-emerald-400 border-r-red-400 border-b-blue-500"></div>
+    </div>
+  </div>
+
+  <!-- Tarjeta 4: Avg win/loss trade -->
+  <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex flex-col justify-between xl:col-span-2">
+    <div class="flex items-center space-x-1.5 text-gray-400 text-xs font-semibold mb-2">
+      <span>Avg win/loss trade</span>
+    </div>
+    <div class="flex items-center justify-between mt-1">
+      <!-- Profit factor dinámico -->
+     
+      <div class="w-3/4 flex flex-col space-y-1">
+        <!-- Barras de progreso -->
+        <div class="flex h-2 w-full rounded-full overflow-hidden">
+          <!-- Aquí podrías usar [ngStyle] para calcular el ancho de la barra dinámicamente si lo deseas -->
+          <div class="bg-emerald-400" [style.width.%]="metrics.winRate"></div>
+          <div class="bg-red-400" [style.width.%]="100 - metrics.winRate"></div>
+        </div>
+        <div class="flex justify-between text-[10px] font-bold mt-1">
+          <span class="text-emerald-500">${{ metrics.avgWin | number:'1.2-2' }}</span>
+          <span class="text-red-500">${{ metrics.avgLoss | number:'1.2-2' }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div> 
+    <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex flex-col justify-between">
+    <div class="flex items-center space-x-1.5 text-gray-400 text-xs font-semibold">
+      <span>Break Evens</span>
+    </div>
+    <div class="flex justify-between items-end mt-3">
+      <span class="text-2xl font-extrabold text-gray-700">{{ metrics.breakEvens }}</span>
+     
+    </div>
+  </div>
+
+</div>
+

@@ -8,5 +8,5 @@ import java.time.LocalDate;
 
 public interface TradesRepository extends CrudRepository <Trade, Long> {
 
-    List<Trade> findByDateAfter(LocalDate date);
+    List<Trade> findByDateGreaterThanEqual(LocalDate date);
 }

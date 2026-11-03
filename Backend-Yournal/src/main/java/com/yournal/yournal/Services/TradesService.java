@@ -1,6 +1,10 @@
 package com.yournal.yournal.Services;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
+
+import com.yournal.yournal.DTO.DashboardDTO;
 import com.yournal.yournal.Models.Trade;
 import com.yournal.yournal.Repositories.TradesRepository;
 
@@ -37,5 +41,26 @@ public class TradesService {
         
     }
 
+    public DashboardDTO get30DaysMetrics(){
+    LocalDate thirtyDays = LocalDate.now().minusDays(30);
+
+    List<Trade> thirtyDaysTrades = tradesRepository.findByDateGreaterThanEqual(thirtyDays);
+
+    int netPnl = thirtyDaysTrades.stream().mapToInt(Trade::getPnl).sum();
+    long winCount = thirtyDaysTrades.stream().filter(t->t.getResult().equalsIgnoreCase("Win")).count();
+    long lossCount = thirtyDaysTrades.stream().filter(t->t.getResult().equalsIgnoreCase("Loss")).count();
+    double winRate = (double) winCount/thirtyDaysTrades.size() * 100;
+    double winsPnl = thirtyDaysTrades.stream().filter(t->"Win".equals(t.getResult())).mapToDouble(Trade::getPnl).sum();
+    double lossesPnl = thirtyDaysTrades.stream().filter(t->"Loss".equals(t.getResult())).mapToDouble(Trade::getPnl).sum();
+    double avgWin = winsPnl/winCount;
+    double avgLoss = lossesPnl/lossCount;
+    long breakEvens = thirtyDaysTrades.size()-(winCount + lossCount);
+
+
+    DashboardDTO metrics = new DashboardDTO(netPnl, winRate, winCount, lossCount, avgWin, avgLoss, breakEvens);
+    return metrics;
+
+
+    }
 
 }
