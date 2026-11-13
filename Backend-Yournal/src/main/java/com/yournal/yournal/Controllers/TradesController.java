@@ -50,6 +50,10 @@ public class TradesController {
     return ResponseEntity.ok(metrics);
    }
    
+   @GetMapping("/secure")
+   public String response(){
+    return "seguro";
+   }
 
     
 
