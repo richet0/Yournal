@@ -26,18 +26,24 @@ public class JwtService
     @Value("${jwt.secret}")
     private String key;
 
+    private static final long REFRESH_TOKEN_EXPIRATION= 1000*60*60*24*60;
+    private static final long ACCESS_TOKEN_EXPIRATION= 1000*60*60*24*7;
+
     public String getToken(UserDetails user){
-        return getToken(new HashMap<>(),user);
+        return getToken(new HashMap<>(),user,ACCESS_TOKEN_EXPIRATION);
+    }
+      public String refreshToken(UserDetails user){
+        return getToken(new HashMap<>(),user,REFRESH_TOKEN_EXPIRATION);
     }
 
-    private String getToken(Map<String,Object> extraClaims,UserDetails user){
+    private String getToken(Map<String,Object> extraClaims,UserDetails user, long expiration){
 
         return Jwts
                 .builder()
                 .claims(extraClaims)
                 .subject(user.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000 *60*60*24))
+                .expiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getKey()).compact();
                 
     }

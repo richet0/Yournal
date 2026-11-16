@@ -14,6 +14,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.yournal.yournal.Services.JwtService;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,12 +24,15 @@ import lombok.RequiredArgsConstructor;
 @Component 
 @RequiredArgsConstructor 
 public class JwtAutenticationFilter extends OncePerRequestFilter {
+  
         private final JwtService jwtService;
         private final UserDetailsService userDetailsService;
-        
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+
+        try{
         String path = request.getRequestURI();
         String username ="";
         if (path.startsWith("/auth")) {
@@ -62,6 +66,12 @@ public class JwtAutenticationFilter extends OncePerRequestFilter {
         }
     }
             filterChain.doFilter(request, response);
+}catch(ExpiredJwtException e){
+    response.getWriter().write("Expired token");
+}catch(Exception e){
+    response.getWriter().write("Invalid token");
+}
+
     }
     
         

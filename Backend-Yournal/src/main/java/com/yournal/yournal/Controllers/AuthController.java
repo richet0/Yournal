@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.yournal.yournal.Auth.AuthResponse;
 import com.yournal.yournal.Auth.LoginRequest;
 import com.yournal.yournal.Auth.RegisterRequest;
+import com.yournal.yournal.DTO.AuthDTO.Auth;
+import com.yournal.yournal.DTO.AuthDTO.RefreshTokenRequest;
 import com.yournal.yournal.Services.AuthService;
 
 import lombok.RequiredArgsConstructor;
@@ -33,6 +35,11 @@ public ResponseEntity<AuthResponse> register(@RequestBody RegisterRequest reques
 
     return ResponseEntity.ok(authService.register(request));
 }
+@PostMapping("/token-refresh")
+public ResponseEntity<Auth>refreshToken(@RequestBody RefreshTokenRequest request){
+    return ResponseEntity.ok(authService.refreshToken(request));
+}
+
 
 
 }
