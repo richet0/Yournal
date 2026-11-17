@@ -9,7 +9,5 @@ public class AuthDTO {
 
     public record RefreshTokenRequest(String refreshToken){}
         
-    
-
 
 }
