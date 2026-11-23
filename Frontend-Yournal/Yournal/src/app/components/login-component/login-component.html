@@ -1,1 +1,46 @@
-<p>login-component works!</p>
+<div class="login-page">
+  <div class="login-card">
+    <h1 class="login-title">Sign in</h1>
+   
+
+    <form [formGroup]="LoginForm" (ngSubmit)="onSubmit()" class="login-form">
+      <div class="form-group">
+        <input
+          type="text"
+          formControlName="username"
+          placeholder="Username"
+          class="form-input"
+          autocomplete="username"
+        />
+      </div>
+
+      <div class="form-group">
+        <input
+          type="password"
+          formControlName="password"
+          placeholder="Password"
+          class="form-input"
+          autocomplete="current-password"
+        />
+      </div>
+
+      <div class="forgot-wrapper">
+        <a href="javascript:void(0)" class="blue-link">Forgot password?</a>
+      </div>
+
+      <button
+        type="submit"
+        class="btn-submit"
+        [disabled]="LoginForm.invalid"
+      >
+        Sign in
+      </button>
+    </form>
+
+    <br>
+
+    <p class="signup-text">
+      Don't have an account? <a routerLink="/register" class="blue-link">Sign up</a>
+    </p>
+  </div>
+</div>

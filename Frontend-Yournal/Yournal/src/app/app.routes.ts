@@ -7,35 +7,37 @@ import { RegisterComponent } from './components/register-component/register-comp
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-
-    {
-        path: '',
-        component: HomeComponent,
-         canActivate : [authGuard]
-
-    },
-    {
-        path:'NewTrade',
-        component:NewTrade,
-         canActivate : [authGuard]
-    },
-    {
-        path:'Dashboard',
-        component:DashboardComponent,
-         canActivate : [authGuard]
-    },
-    {
-        path:'Login',
-        component:LoginComponent,
-       
-    },
-    {
-        path:'Register',
-        component:RegisterComponent
-    },
-    {
-        path:'**',
-        redirectTo:''
-    }
-
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'home',
+    component: HomeComponent
+  },
+  {
+    path: 'newTrade',
+    component: NewTrade,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
+    path: '**',
+    redirectTo: 'login'
+  }
 ];
+
+
