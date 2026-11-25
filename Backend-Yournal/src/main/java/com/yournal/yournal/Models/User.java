@@ -42,11 +42,13 @@ String password;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Spring Security leerá el rol desde aquí
+        if (role == null) {
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
-    // ¡IMPORTANTE! Estos 4 métodos deben devolver 'true'
+   
     @Override
     public boolean isAccountNonExpired() {
         return true; 

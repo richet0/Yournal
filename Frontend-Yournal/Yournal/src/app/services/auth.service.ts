@@ -4,8 +4,8 @@ import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 export interface AuthResponse {
-  accessToken: string;
-  refreshToken: string;
+  token: string;
+  refreshToken?: string;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -20,7 +20,7 @@ export class AuthService {
     );
   }
 
-  register(credentials: { username: string; password: string; email:string }) {
+  register(credentials: { username: string; password: string; email: string }) {
     return this.http.post<AuthResponse>(`${this.apiUrl}/register`, credentials).pipe(
       tap(tokens => this.saveTokens(tokens))
     );
@@ -33,21 +33,32 @@ export class AuthService {
     );
   }
 
-
   logout() {
     localStorage.removeItem('access_token');
     localStorage.removeItem('refresh_token');
     this.router.navigate(['/login']);
   }
 
-  private saveTokens(tokens: AuthResponse) {
-    localStorage.setItem('access_token', tokens.accessToken);
-    if (tokens.refreshToken) {
-      localStorage.setItem('refresh_token', tokens.refreshToken);
-    }
-  }
 
   getAccessToken(): string | null {
-    return localStorage.getItem('access_token');
+    const token = localStorage.getItem('access_token');
+    if (!token || token === 'undefined' || token === 'null') {
+      return null;
+    }
+    return token;
   }
+  private saveTokens(tokens: any) {
+  
+
+  // Busca el token sin importar cómo lo haya nombrado el DTO de Spring Boot
+  const access = tokens?.token || tokens?.accessToken || tokens?.access_token || tokens?.jwt;
+  const refresh = tokens?.refreshToken || tokens?.refresh_token;
+
+  if (access) {
+    localStorage.setItem('access_token', access);
+  }
+  if (refresh) {
+    localStorage.setItem('refresh_token', refresh);
+  }
+}
 }

@@ -6,6 +6,7 @@ import { LoginComponent } from './components/login-component/login-component';
 import { RegisterComponent } from './components/register-component/register-component';
 import { authGuard } from './guards/auth.guard';
 
+
 export const routes: Routes = [
   {
     path: '',
@@ -37,6 +38,7 @@ export const routes: Routes = [
   {
     path: '**',
     redirectTo: 'login'
+    
   }
 ];
 

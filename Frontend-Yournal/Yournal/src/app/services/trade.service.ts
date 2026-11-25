@@ -1,5 +1,5 @@
 import { Injectable,inject } from "@angular/core"
-import { HttpClient } from "@angular/common/http"
+import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { Observable } from "rxjs"
 import { Trade } from "../data/trade.model"
 
@@ -14,11 +14,15 @@ export class TradeService{
 
 
     newTrade(trade : Trade): Observable<Trade>{
-        return this.http.post<Trade>(this.apiUrl.concat('trade/save'), trade);
+    
+       return this.http.post<Trade>(`${this.apiUrl}trade/save`, trade);
+        
     }
     getDashboardMetrics():Observable<any>{
         return this.http.get(this.apiUrl.concat('trade/metrics'))
     }
-
+    getUserTrades():Observable<Trade[]>{
+        return this.http.get<Trade[]>(this.apiUrl.concat('trade/trades'))
+    }
 }
 

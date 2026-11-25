@@ -55,6 +55,7 @@ public class JwtAutenticationFilter extends OncePerRequestFilter {
 
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
+
             if(jwtService.isTokenValid(token,userDetails)){
 
                 UsernamePasswordAuthenticationToken authToken= new UsernamePasswordAuthenticationToken(userDetails, null,userDetails.getAuthorities());
@@ -65,13 +66,14 @@ public class JwtAutenticationFilter extends OncePerRequestFilter {
             
         }
     }
-            filterChain.doFilter(request, response);
+           
 }catch(ExpiredJwtException e){
+    e.printStackTrace();
     response.getWriter().write("Expired token");
 }catch(Exception e){
     response.getWriter().write("Invalid token");
 }
-
+     filterChain.doFilter(request, response);
     }
     
         

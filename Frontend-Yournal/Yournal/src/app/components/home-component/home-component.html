@@ -1,1 +1,71 @@
-<p>home-component works!</p>
+<div class="home-page">
+ 
+  <header class="navbar">
+    <div class="navbar-container">
+      <a class="brand" (click)="goToHome()">
+        <span class="brand-bold">YOUR</span><span class="brand-light">NAL</span>
+      </a>
+
+      <nav class="nav-actions">
+        <button type="button" class="btn-login" (click)="goToLogin()">
+          Log In
+        </button>
+        <button type="button" class="btn-register" (click)="goToRegister()">
+          Register Now ›
+        </button>
+      </nav>
+    </div>
+  </header>
+
+
+  <main class="hero-section">
+    <div class="hero-content">
+      <div class="promo-badge">
+        <span class="badge-tag">TRADING ANALYTICS</span>
+        <span class="badge-text">Track every trade with precision</span>
+      </div>
+
+      <h1 class="hero-title">
+        Your <span class="text-gradient"> Trading Journal</span><br />
+        and Trade Tracker
+      </h1>
+
+      <p class="hero-description">
+        Find out which setups make you money. Analyze your metrics, manage risk,
+        and turn your trading data into consistent profitability.
+      </p>
+
+      <div class="cta-row">
+        <button type="button" class="btn-cta-primary" (click)="goToRegister()">
+          Register Now →
+        </button>
+        <button type="button" class="btn-cta-secondary" (click)="goToLogin()">
+          Log In to Dashboard
+        </button>
+      </div>
+    </div>
+
+      
+  </main>
+
+  <section class="stats-bar">
+    <div class="stats-container">
+      <div class="stat-item">
+        <span class="stat-number">100%</span>
+        <span class="stat-label">Data-driven insights</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">24/7</span>
+        <span class="stat-label">Portfolio & trade tracking</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">Real-time</span>
+        <span class="stat-label">Performance metrics</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">Free</span>
+        <span class="stat-label">To get started today</span>
+      </div>
+    </div>
+  </section>
+</div>

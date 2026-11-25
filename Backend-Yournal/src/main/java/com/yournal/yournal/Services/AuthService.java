@@ -57,7 +57,7 @@ public class AuthService {
 
    public AuthResponse register(RegisterRequest request) {
     try {
-        System.out.println("llego");
+       
         User user = User.builder()
                 .username(request.getUsername())
                 .email(request.getEmail())

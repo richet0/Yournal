@@ -1,9 +1,9 @@
 import { Component,inject } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { FormBuilder,FormGroup,ReactiveFormsModule,Validators } from '@angular/forms';
-import {Router} from '@angular/router'
+import {Router, RouterLink} from '@angular/router'
 @Component({
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,RouterLink],
   selector: 'app-register-component',
   styleUrl: './register-component.css',
   templateUrl: './register-component.html',
@@ -26,7 +26,7 @@ export class RegisterComponent {
       password:this.RegisterForm.value.password, 
       email:this.RegisterForm.value.email}
       
-      this.authService.login(cretendials).subscribe({
+      this.authService.register(cretendials).subscribe({
          next: (backendResponse)=>{
           console.log(backendResponse)
           this.RegisterForm.reset();

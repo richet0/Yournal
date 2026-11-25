@@ -3,5 +3,6 @@ export interface Trade{
      pnl:number;
      urlImage:string;
      result:string;
+     id:number
 }
 

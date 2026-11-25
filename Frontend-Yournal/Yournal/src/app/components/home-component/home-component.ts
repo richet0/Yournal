@@ -1,9 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
-  imports: [],
   selector: 'app-home-component',
-  styleUrl: './home-component.css',
+  standalone: true,
+  imports: [],
   templateUrl: './home-component.html',
+  styleUrl: './home-component.css',
 })
-export class HomeComponent {}
+export class HomeComponent {
+  private router = inject(Router);
+
+  goToLogin(): void {
+    this.router.navigate(['/login']);
+  }
+
+  goToRegister(): void {
+    this.router.navigate(['/register']);
+  }
+
+   goToHome(): void {
+    this.router.navigate(['/']);
+  }
+}
